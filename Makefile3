@@ -1,0 +1,40 @@
+CC=g++
+
+override CFLAGS+=-DIL_STD -c -Wall -O3 --std=c++11 -I/home/carol/Desktop/MAPD/include -I/home/carol/Desktop/MAPD/boost_1_71_0 -L/home/carol/Desktop/MAPD/boost_1_71_0/stage/lib
+
+override CFLAGSL+=
+override LDFLAGS+=-DIL_STD 
+
+
+SOURCES=                          \
+    main.cpp                      \
+    Agent.cpp                   \
+    Simulation.cpp			  \
+    GA.cpp                \
+    SingleSearch.cpp                  \
+    node.cpp                 \
+    Endpoint.cpp		\
+    compute_heuristic.cpp	\
+    MDD.cpp		\
+    LLNode.cpp		\
+    SingleAgentICBS.cpp   \
+    egraph_reader.cpp   \
+    agents_loader.cpp   \
+    ICBSSearch.cpp	\
+    ICBSNode.cpp 	\
+    map_loader.cpp
+
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=exec_mapd
+
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@ $(CFLAGSL)
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@ $(CFLAGSL)
+
+.PHONY: clean
+clean:
+	$(RM) $(OBJECTS) $(EXECUTABLE)
