@@ -19,7 +19,6 @@ SOURCES=                          \
     LLNode.cpp		\
     SingleAgentICBS.cpp   \
     egraph_reader.cpp   \
-    agents_loader.cpp   \
     ICBSSearch.cpp	\
     ICBSNode.cpp 	\
     map_loader.cpp

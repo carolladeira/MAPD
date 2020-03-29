@@ -6,7 +6,6 @@
 #include <ostream>
 #include <fstream>
 #include <string>
-
 #include "include/Timer.hpp"
 #include "Simulation.h"
 
@@ -30,14 +29,14 @@ int run(string ag, string fr,  int seed, string problem, int bestInd) {
 
     if(stoi(ag)> 50){
       cout << "LARGE" << endl;
-      map_file = "/Instances/large/kiva-" + ag + "-1000-50.map";     //LARGE
-      task_file = "/Instances/large/kiva-1000-50.task";              //LARGE
-      res_file = "/Resultados/large" + ind + "-" + problem + ".csv"; //LARGE
+      map_file = "./Instances/large/kiva-" + ag + "-1000-50.map";     //LARGE
+      task_file = "./Instances/large/kiva-1000-50.task";              //LARGE
+      res_file = "./Resultados/large" + ind + "-" + problem + ".csv"; //LARGE
     }else{
       cout << "SMALL" << endl;
-      map_file = "/Instances/small/kiva-" + ag + "-500-5.map";       //SMALL
-      task_file = "/Instances/small/kiva-" + fr + ".task";           //SMALL
-      res_file = "/Resultados/small" + ind + "-" + problem + ".csv"; //SMALL
+      map_file = "./Instances/small/kiva-" + ag + "-500-5.map";       //SMALL
+      task_file = "./Instances/small/kiva-" + fr + ".task";           //SMALL
+      res_file = "./Resultados/small" + ind + "-" + problem + ".csv"; //SMALL
     }
     cout << map_file << endl;
 
