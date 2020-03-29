@@ -137,10 +137,8 @@ dlib/optimization/max_cost_assignment.h
 /home/carol/Desktop/MAPD/ICBSNode.h
 MDD.h
 /home/carol/Desktop/MAPD/MDD.h
-
-/home/carol/Desktop/MAPD/ICBSSearch.cpp
-ICBSSearch.h
-/home/carol/Desktop/MAPD/ICBSSearch.h
+SingleAgentICBS.h
+/home/carol/Desktop/MAPD/SingleAgentICBS.h
 
 /home/carol/Desktop/MAPD/ICBSSearch.h
 ICBSNode.h
@@ -173,10 +171,6 @@ stdio.h
 -
 SingleAgentICBS.h
 /home/carol/Desktop/MAPD/SingleAgentICBS.h
-
-/home/carol/Desktop/MAPD/Simulation.cpp
-Simulation.h
-/home/carol/Desktop/MAPD/Simulation.h
 
 /home/carol/Desktop/MAPD/Simulation.h
 vector

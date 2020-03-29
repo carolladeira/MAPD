@@ -75,7 +75,7 @@ bool MDD::buildMDD(const vector < list< tuple<int, int, bool> > >& constraints, 
 					(*parent)->cost = (*it)->cost;
 				else
 					(*parent)->cost = min((*parent)->cost, (*it)->cost);
-				(*parent)->children.push_back(*it); // add forward edge	
+				(*parent)->children.push_back(*it); // add forward edge
 			}
 		}
 	}
@@ -153,7 +153,7 @@ void MDD::clear()
 	}
 }
 
-MDDNode* MDD::find(int location, int level) 
+MDDNode* MDD::find(int location, int level)
 {
 	if(level < levels.size())
 		for (list<MDDNode*>::iterator it = levels[level].begin(); it != levels[level].end(); ++it)
@@ -188,7 +188,7 @@ MDD::MDD(MDD & cpy) // deep copy
 				}
 			}
 		}
-		
+
 	}
 }
 

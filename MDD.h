@@ -12,7 +12,7 @@ public:
 
 	MDDNode(int currloc, MDDNode* parent)
 	{
-		location = currloc; 
+		location = currloc;
 		if(parent == NULL)
 			level = 0;
 		else
@@ -29,10 +29,10 @@ public:
 	int cost; // the minimal cost of path that traverses this node - current cost
 	int num_internal_conf; // used for bypass choosing
 	 // the following is used to comapre nodes in the OPEN list
-	struct compare_node 
+	struct compare_node
 	{
 		// returns true if n1 > n2 (note -- this gives us *min*-heap).
-		bool operator()(const MDDNode* n1, const MDDNode* n2) const 
+		bool operator()(const MDDNode* n1, const MDDNode* n2) const
 		{
 			return n1->num_internal_conf >= n2->num_internal_conf;
 		}
@@ -60,7 +60,7 @@ public:
 	void deleteNode(MDDNode* node);
 	void clear();
 
-	
+
 
 	MDD(){};
 	MDD(MDD & cpy);

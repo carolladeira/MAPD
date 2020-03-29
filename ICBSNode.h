@@ -1,6 +1,7 @@
 #pragma once
 //#include "ecbs_node.h"
 #include "MDD.h"
+#include "SingleAgentICBS.h"
 //enum conflict_type { UNKNOWN, CARDINAL, SEMI, GEQSEMI, NON,  TYPE_COUNT };
 
 //struct Conflict
