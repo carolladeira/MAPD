@@ -31,7 +31,7 @@ int run(string ag, string fr,  int seed, string problem, int bestInd) {
     if(stoi(ag)> 50){
       cout << "LARGE" << endl;
       map_file = "/Instances/large/kiva-" + ag + "-1000-50.map";     //LARGE
-      task_file = "/MAPD/Instances/large/kiva-1000-50.task";              //LARGE
+      task_file = "/Instances/large/kiva-1000-50.task";              //LARGE
       res_file = "/Resultados/large" + ind + "-" + problem + ".csv"; //LARGE
     }else{
       cout << "SMALL" << endl;
