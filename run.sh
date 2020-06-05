@@ -9,14 +9,34 @@
 
 # ./exec_mapd agents freq seed problem bestInd
 
-for s in  "22" "23" "24" "25" "26" "27" "28" "29" "30"; do
-  for p in "SCOL_E"; do
-   for i in "2"; do
-      for j in "30"; do
-         for k in 1; do
-    	    ./exec_mapd $j $i $s $p $k
-         done
-      done
-    done
-  done
+for se in {1..25};do
+	for s in "10" "20" "30" "40" "50"; do
+	    ./exec_mapd $s 10 $se CBS_TA 1
+	    ./exec_mapd $s 10 $se AS_TA 1
+	  #  ./exec_mapd $s 10 $se SCOL_TA 1
+	done
+done
+
+for se in {1..25};do
+	for s in "10" "20" "30" "40" "50"; do
+	    ./exec_mapd $s 5 $se CBS_TA 1
+	    ./exec_mapd $s 5 $se AS_TA 1
+	  #  ./exec_mapd $s 5 $se SCOL_TA 1
+	done
+done
+
+for se in {1..25};do
+	for s in "10" "20" "30" "40" "50"; do
+	    ./exec_mapd $s 2 $se CBS_TA 1
+	    ./exec_mapd $s 2 $se AS_TA 1
+	    #./exec_mapd $s 2 $se SCOL_TA 1
+	done
+done
+
+for se in {1..25};do
+	for s in "10" "20" "30" "40" "50"; do
+	    ./exec_mapd $s 1 $se CBS_TA 1
+	    ./exec_mapd $s 1 $se AS_TA 1
+	    #./exec_mapd $s 2 $se SCOL_TA 1
+	done
 done

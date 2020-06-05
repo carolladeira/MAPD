@@ -21,25 +21,23 @@ int run(string ag, string fr,  int seed, string problem, int bestInd) {
 
     if(bestInd == 1) ind = "cI";
 
-   // cout <<"SEED: "<<seed<< " | " << problem <<" | "<< ind << " ============= AG: " << ag << " - F: " << fr << " =============" << endl;
+    cout <<"SEED: "<<seed<< " | " << problem <<" | "<< ind << " ============= AG: " << ag << " - F: " << fr << " =============" << endl;
 
     string map_file = " ";
     string task_file = " ";
     string res_file = " ";
-
+    string p = "/home/carol/Desktop/MAPD";
     if(stoi(ag)> 50){
       cout << "LARGE" << endl;
-      map_file = "./Instances/large/kiva-" + ag + "-1000-50.map";     //LARGE
-      task_file = "./Instances/large/kiva-1000-50.task";              //LARGE
-      res_file = "./Resultados/large" + ind + "-" + problem + ".csv"; //LARGE
+      map_file = p + "/Instances/large/kiva-" + ag + "-1000-50.map";     //LARGE
+      task_file = p+"/Instances/large/kiva-1000-50.task";              //LARGE
+      res_file = p+"/Resultados/large" + ind + "-" + problem + ".csv"; //LARGE
     }else{
       cout << "SMALL" << endl;
-      map_file = "./Instances/small/kiva-" + ag + "-500-5.map";       //SMALL
-      task_file = "./Instances/small/kiva-" + fr + ".task";           //SMALL
-      res_file = "./Resultados/small" + ind + "-" + problem + ".csv"; //SMALL
+      map_file = p+"/Instances/small/kiva-" + ag + "-500-5.map";       //SMALL
+      task_file = p+"/Instances/small/kiva-" + fr + ".task";           //SMALL
+      res_file = p+"/Resultados/small" + ind + "-" + problem + ".csv"; //SMALL
     }
-    cout << map_file << endl;
-
     simu = new Simulation(map_file, task_file, 0);
     std::clock_t c_start = std::clock();
 
@@ -76,7 +74,7 @@ int run(string ag, string fr,  int seed, string problem, int bestInd) {
 
 int main(int argc, char *argv[]) {
 
-   // run("10", "10", 1, "CBS_TA", 1 );
+   // run("10", "10", 1, "SCOL_E", 1 );
  run( argv[1], argv[2], atoi(argv[3]), argv[4], atoi(argv[5]));
 
 

@@ -1,6 +1,3 @@
-//
-// Created by carol on 1/21/19.
-//
 
 #ifndef MAPDAG_GA_H
 #define MAPDAG_GA_H
@@ -10,16 +7,17 @@
 #include "dlib/optimization/max_cost_assignment.h"
 
 
-#define sizePopulation_TA           50
-#define sizePopulation_E            50
+#define sizePopulation_TA           20
+#define sizePopulation_E            20
 
 #define CROSSOVER_RATE            0.8
 #define MUTATION_RATE             0.5
 #define TOURNAMENT                0.01
 #define ELITISM                   0.04
 #define MUTATION_AGENT            0.3
-#define TIMEOUT                   180
 #define GENERATIONS               50
+#define TIMEOUT                   180
+
 
 class Gene{
 public:
@@ -72,7 +70,7 @@ public:
 class GA_E: public GA{
 public:
     int cont = 0;
-    void escalonamento(vector<Gene> &individual);
+    int escalonamento(vector<Gene> &individual);
     int findAgentCloser(int release_time, int loc_start, vector<Agent> agents);
 
     vector<vector<int>> run_GA(vector<Agent> agents, vector<Task*> taskset, Token token, vector<Task> task_total, vector<vector<int> > Dis, bool bestInd);

@@ -5,7 +5,7 @@
 #include <random>
 #include "GA.h"
 
-#define IMPRIME
+//#define IMPRIME
 
 bool myfunction(Gene i, Gene j) { return (i.task < j.task); }
 
@@ -431,10 +431,12 @@ float GA::getFitness(vector<Gene> &individual, Token token) {
         if (start > makespan) makespan = start;
 
     }
+   // cout<<" mks: "<<makespan ;
+
     return makespan;
 }
 
-void GA_E::escalonamento(vector<Gene> &individual) {
+int GA_E::escalonamento(vector<Gene> &individual) {
     vector<Agent> agents = copy_agents;
     Task n;
     int id_agent;
@@ -446,13 +448,26 @@ void GA_E::escalonamento(vector<Gene> &individual) {
         int loc_goal_task = n.goal->loc;
         id_agent = findAgentCloser(release_time, loc_start_task, agents);
         individual[i].agent = id_agent;
-        int ft =  max(Dis[agents[id_agent].loc][loc_start_task] + agents[id_agent].finish_time, release_time);
-       // cout<<endl<<"Agente "<<id_agent<<" pega tarefa "<<id_task <<" Rt: "<<release_time<<" loc: "<<agents[id_agent].loc<<" -> "<<loc_start_task<<"[";
+        int ft =  Dis[agents[id_agent].loc][loc_start_task] + agents[id_agent].finish_time;
+       // int ft =  max(Dis[agents[id_agent].loc][loc_start_task] + agents[id_agent].finish_time, release_time);
+
+        // cout<<endl<<"Agente "<<id_agent<<" pega tarefa "<<id_task <<" Rt: "<<release_time<<" loc: "<<agents[id_agent].loc<<" -> "<<loc_start_task<<"[";
        // cout<<ft<<"] -> "<<loc_goal_task<<"["<<Dis[loc_start_task][loc_goal_task]<<"] = "<< ft+ Dis[loc_start_task][loc_goal_task];
 
         agents[id_agent].finish_time = ft+ Dis[loc_start_task][loc_goal_task] ;
         agents[id_agent].loc = loc_goal_task;
     }
+    int fitness = 0 ;
+    Agent ag;
+    for(int i =0; i <agents.size(); i++){
+        ag = agents[i];
+        int finish_time = ag.finish_time;
+        if(finish_time > fitness){
+            fitness = finish_time;
+        }
+    }
+    //cout<<"ft: "<<fitness ;
+    return fitness;
 }
 
 int GA_E::findAgentCloser(int release_time, int loc_start, vector<Agent> agents) {
@@ -463,7 +478,8 @@ int GA_E::findAgentCloser(int release_time, int loc_start, vector<Agent> agents)
         int finish_time = ag.finish_time;
         int loc = ag.loc;
         int dist = Dis[loc][loc_start];
-        int t_ateTask = max(dist + finish_time, release_time);
+       // int t_ateTask = max(dist + finish_time, release_time);
+        int t_ateTask = dist + finish_time;
         if(t_ateTask < best_t){
             best_ag = ag.id;
             best_t = t_ateTask;
@@ -500,8 +516,8 @@ vector<vector<int>> GA_E::run_GA(vector<Agent> agents, vector<Task *> taskset, T
 #endif
 
     for (int i = 0; i < sizePopulation_E; i++) {
-        escalonamento(pop[i].Individual);
-        pop[i].fitness = getFitness(pop[i].Individual, token_ag);
+        pop[i].fitness = escalonamento(pop[i].Individual);
+
     }
     int i = 0;
     while (i < GENERATIONS) {
@@ -528,8 +544,7 @@ vector<vector<int>> GA_E::run_GA(vector<Agent> agents, vector<Task *> taskset, T
         }
 
         for (int i = 0; i < sizePopulation_E; i++) {
-            escalonamento(newPop[i].Individual);
-            newPop[i].fitness = getFitness(newPop[i].Individual, token_ag);
+            newPop[i].fitness =  escalonamento(newPop[i].Individual);
         }
 
         std::sort(pop.begin(), pop.end(), sort_fitness);
@@ -546,8 +561,9 @@ vector<vector<int>> GA_E::run_GA(vector<Agent> agents, vector<Task *> taskset, T
 #ifdef IMPRIME
         int id = getBestChromosome();
         double best_fitness = pop[id].fitness;
-        fout << cont << "," << i << "," << best_fitness << "," << GENERATIONS << "," << sizePopulation_TA << "," << CROSSOVER_RATE << "," << MUTATION_RATE << "," << MUTATION_AGENT << "," << TOURNAMENT << "," << ELITISM << endl;
-#endif
+        fout << cont << "," << i << "," << best_fitness << "," << GENERATIONS << "," << sizePopulation_E << "," << CROSSOVER_RATE << "," << MUTATION_RATE << "," << MUTATION_AGENT << "," << TOURNAMENT << "," << ELITISM << endl;
+   //fout.close();
+    #endif
     }
     int id = getBestChromosome();
     //cout <<"Duration: "<<duration<< " Fitness: " << pop[id].fitness <<" Generations:" <<i<<endl;
@@ -715,7 +731,8 @@ vector<vector<int>> GA_TA::run_GA(vector<Agent> agents, vector<Task *> taskset, 
         int id = getBestChromosome();
         double best_fitness = pop[id].fitness;
         fout <<cont<<","<< i << ","<< best_fitness <<","<<GENERATIONS<<","<<sizePopulation_TA<<","<<CROSSOVER_RATE<<","<<MUTATION_RATE<<","<<MUTATION_AGENT<<","<<TOURNAMENT<<","<< ELITISM<< endl;
-#endif
+   fout.close();
+    #endif
     }
 
     int id = getBestChromosome();
